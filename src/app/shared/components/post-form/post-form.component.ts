@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Iposts } from '../../models/posts';
 import { PostsService } from '../../services/posts.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatsnackService } from '../../services/matsnack.service';
 
 @Component({
@@ -25,6 +25,7 @@ export class PostFormComponent implements OnInit {
 
   private _actRoute = inject(ActivatedRoute);
   private _snackbar = inject(MatsnackService);
+  private _route = inject(Router)
 
 
   constructor(private _postService: PostsService) { }
@@ -62,13 +63,14 @@ export class PostFormComponent implements OnInit {
 
   onAddPost() {
 
-    if (this.postForm.valid) {
+    if (this.postForm.valid && !this.isInEditMode) {
       this.newPostObj = this.postForm.value;
       console.log(this.newPostObj);
       this._postService.addpost(this.newPostObj).subscribe((post: Iposts) => {
 
         this.postForm.reset()
         this._snackbar.openSnackBar('Post Added Succesfully', 'close')
+        this._route.navigate(['posts'])
       })
     } else {
       this._snackbar.openSnackBar('Enter All the details', 'close')
@@ -87,12 +89,14 @@ export class PostFormComponent implements OnInit {
       this._postService.updatePost(this.updatePostObj).subscribe((obj: any) => {
         console.log(obj);
         this.postForm.reset()
+
         this._snackbar.openSnackBar('Post Updated Succesfully', 'close')
+        this._route.navigate(['posts'])
       })
 
     } else {
-      this._snackbar.openSnackBar('Enter All the details', 'close')
-    }
+      // this._snackbar.openSnackBar('Enter All the details', 'close')
 
+    }
   }
 }
