@@ -6,7 +6,7 @@ import { PostFormComponent } from './shared/components/post-form/post-form.compo
 
 const routes: Routes = [
 
-  { path: "", component: PostsDashComponent, },
+  { path: "", component: PostsDashComponent },
   { path: "posts", component: PostsDashComponent },
   { path: "posts/add-post", component: PostFormComponent },
   { path: "posts/:postId", component: PostComponent },
@@ -19,3 +19,10 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+
+
+
+
+

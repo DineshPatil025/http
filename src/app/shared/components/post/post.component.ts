@@ -24,6 +24,8 @@ private _postsService = inject(PostsService)
       console.log(this.postId);
       this._postsService.getSinglePost(this.postId).subscribe((post:Iposts) =>{
         this.singlePostObj = post;
+
+        
         
       })
       

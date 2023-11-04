@@ -16,12 +16,12 @@ export class PostsDashComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
     this._postsService.getAllPosts()
       .subscribe((resp: Array<Iposts>) => {
         this.postsArray = resp
-        console.log(this.postsArray);
+        // console.log(this.postsArray);
       })
-
-    }
+  }
 
 }
