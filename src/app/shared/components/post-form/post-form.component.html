@@ -1,6 +1,7 @@
+<h2> {{isInEditMode ? 'Update the post' : 'Add Post'}}</h2>
 <form [formGroup]="postForm" (ngSubmit)="onAddPost()">
     <div class="form-group">
-        <label for="title">Title </label>
+        <label for="title">Title</label>
         <input type="text" id="title" formControlName="title" class="form-control">
     </div>
 
@@ -16,7 +17,11 @@
         </select>
     </div>
     <div class="text-right">
-        <button class="btn btn-success">Add Post</button>
+        <button class="btn btn-success" [type]="isInEditMode ? 'button' : 'submit' " 
+        
+        (click)="onPostUpdate()" 
+        >{{isInEditMode? 'Update the Post': 'Add New Post'}}</button>
     </div>
 
 </form>
+
