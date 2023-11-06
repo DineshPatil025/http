@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Iposts } from '../../models/posts';
 import { PostsService } from '../../services/posts.service';
+import { MatsnackService } from '../../services/matsnack.service';
 
 @Component({
   selector: 'app-post',
@@ -14,7 +15,9 @@ export class PostComponent implements OnInit {
   singlePostObj !: Iposts
 
   private _actRoute = inject(ActivatedRoute);
-  private _postsService = inject(PostsService)
+  private _postsService = inject(PostsService);
+  private _router = inject(Router);
+  private _snackBar = inject(MatsnackService);
 
   constructor() { }
 
@@ -29,6 +32,15 @@ export class PostComponent implements OnInit {
       })
 
     })
+  }
+
+
+  postDelete(){
+    this._postsService.deletePost(this.postId).subscribe((res:any) => 
+      console.log(res)
+      );
+      this._snackBar.openSnackBar('Post deleted succesfully','close')
+      this._router.navigate(['posts'])
   }
 
 }

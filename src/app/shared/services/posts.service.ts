@@ -31,4 +31,9 @@ export class PostsService {
     let updateUrl = `${this.postUrl}/${post.id}`
     return this._http.patch<Iposts>(updateUrl,post)
   }
+
+  deletePost(postId:string):Observable<any>{
+    let deleteUrl = `${this.postUrl}/${postId}`
+   return this._http.delete<any>(deleteUrl)
+  }
 }
